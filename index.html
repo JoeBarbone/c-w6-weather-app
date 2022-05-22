@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="text-center p-2">Weather Dashboard</h1>
+        </header>
+
+        <div class="main-content d-flex m-3">
+
+            <div class="search-history d-flex flex-column w-25">
+                <h2 class="py-3">Search for a City</h2>
+                <input class="py-2" type="text" placeholder="Orlando" />
+                <button class="btn btn-primary btnSearch my-4">Search</button>
+            </div>
+
+            <div class="weather-info w-75 m-3 p-3">
+
+                <div class="today w-100">
+                    <p>Today's weather outlook</p>
+                </div>
+
+                <div class="five-day w-100">
+                    <p>five day forcast</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

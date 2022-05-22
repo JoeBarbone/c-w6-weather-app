@@ -1,0 +1,20 @@
+header {
+    background-image: linear-gradient(to right, #3463BC, #20094B);
+    color: #FFFFFF;
+}
+
+.search-history {
+    border-bottom: 2px solid black;
+}
+
+.weather-info {
+    border: 1px solid blue;
+}
+
+.today {
+    border: 1px solid red;
+}
+
+.five-day {
+    border: 1px solid red;
+}
