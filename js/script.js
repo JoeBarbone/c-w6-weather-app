@@ -12,7 +12,7 @@ var getCity = function(searchCity) {
     
     
     var searchCity = document.getElementById("searchCity").value;
-    var searchCityUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335";
+    var searchCityUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335";
     
     fetch(searchCityUrl)
     .then(function (response) {
