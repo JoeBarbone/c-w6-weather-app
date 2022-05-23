@@ -131,7 +131,7 @@ var getWeather = function(loc, lat, lon) {
 
                 dailyHeadingEl.innerHTML = "<h4>" + forecastDate + "</h4>";
 
-                dailyWeatherEl.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png' />" + 
+                dailyWeatherEl.innerHTML = "<img src='https://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png' />" + 
                 "<br />" + "Temp: " + data.daily[i].temp.day + "°" + 
                 "<br />" + "Wind: " + data.daily[i].wind_speed + "mph" + 
                 "<br />" + "Humidity: " + data.daily[i].humidity + "%" + 
