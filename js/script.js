@@ -1,4 +1,5 @@
 var searchCityButtonEl = document.querySelector("#searchCityButton");
+var clearCityButtonEl = document.querySelector("#clearCityHistory");
 var searchHistoryEl = document.querySelector("#searchHistory");
 var historyButtonFormEl = document.querySelector("#history-button-form");
 var searchHistoryButtonEl = document.createElement("button");
@@ -216,7 +217,7 @@ var saveHistory = function(searchCity) {
 
 
 var loadHistory = function() {
-
+    
     var existingHistory = JSON.parse(localStorage.getItem("cities"));
 
     if (existingHistory) {
@@ -231,6 +232,21 @@ var loadHistory = function() {
 
 
 
+var clearCityHistory = function() {
+
+    var existingHistory = JSON.parse(localStorage.getItem("cities"));
+
+    if (existingHistory) {
+        existingHistory = [];
+        localStorage.setItem("cities", JSON.stringify(existingHistory));
+        location.reload();
+    }
+
+}
+
+
+
 loadHistory();
 searchCityButtonEl.addEventListener("click", getCity);
+clearCityButtonEl.addEventListener("click", clearCityHistory);
 historyButtonFormEl.addEventListener("click", buttonHandler);

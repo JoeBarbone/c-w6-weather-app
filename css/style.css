@@ -1,8 +1,18 @@
-header {
-    background-image: linear-gradient(to right, #3463BC, #20094B);
-    color: #FFFFFF;
+* {
+    font-family: 'Segoe UI Light', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
+/* Start tag styles */
+header {
+    background-image: linear-gradient(to right, #3463BC, #2D3E50);
+    color: #FFFFFF;
+    /* was #20094B */
+}
+
+
+
+/* Start class styles */
 .btnSearchHistory {
     background-color: #AEAEAE;
     color: black;
@@ -10,18 +20,23 @@ header {
     margin: 5px 0;
 }
 
-.today {
-    border: 1px solid black;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
+.btnSearchHistory:hover {
+    background-color: #2D3E50;
+    color: white;
+}
+
+.btn-primary {
+    
+    width: 45%;
 }
 
 .five-day {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     background-color: #2D3E50;
     color: white;
     padding: 10px;
+    box-shadow: 3px 4px 5px black;
+    border-radius: 10px;
 }
 
 .five-day h4 {
@@ -29,12 +44,28 @@ header {
     padding: 0;
 }
 
-.xuvi span {
-    padding: 5px;
+.today {
     border: 1px solid black;
+    font-size: 1.2rem;
+    box-shadow: 3px 4px 5px black;
     border-radius: 10px;
 }
 
+.today h1 {
+    background-color: #2D3E50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.weather-info h3 {
+    margin-top: 40px;
+}
+
+
+
+
+/* start UVI customizations */
 .low span {
     padding: 5px 10px;
     border-radius: 5px;
@@ -70,6 +101,11 @@ header {
     background-color: #988FFC;
     color: white;
 }
+
+
+
+
+/* Start Media Queries */
 
 @media screen and (max-width: 820px) {
 

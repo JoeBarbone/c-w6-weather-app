@@ -10,18 +10,21 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <div class="container mx-auto">
+    <div class="container-fluid mx-auto">
         <header>
             <h1 class="text-center p-2">Weather Dashboard</h1>
         </header>
         
     
-        <div class="main-content d-flex m-3">
+        <div class="main-content d-flex m-3 justify-content-center">
 
             <div class="col col-sm-12 col-md-8 col-lg-3 search-history d-flex flex-column">
                 <h2 class="py-3">Search for a City</h2>
                 <input id="searchCity" class="py-2" type="text" placeholder="Orlando" />
-                <button id="searchCityButton" class="btn btn-primary btnSearch my-4">Search</button>
+                <div class="buttons d-flex justify-content-between">   
+                    <button id="searchCityButton" class="btn btn-primary btnSearch my-4">Search</button>
+                    <button id="clearCityHistory" class="btn btn-primary btnClear my-4">Clear</button>
+                </div>
             
                 <form id="history-button-form">
                     <div id="searchHistory" class="history">
