@@ -1,9 +1,14 @@
 var searchCityButtonEl = document.querySelector("#searchCityButton");
+var searchHistoryEl = document.querySelector("#searchHistory");
+var historyButtonFormEl = document.querySelector("#history-button-form");
+var searchHistoryButtonEl = document.createElement("button");
 var todayDate = moment().format("MM/DD/YYYY");  
 
+var searchHistoryArr = [ ];
 
 
 var getCity = function(searchCity) {
+    
     
     var searchCity = document.getElementById("searchCity").value;
     var searchCityUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335";
@@ -13,23 +18,29 @@ var getCity = function(searchCity) {
         return response.json();
     })
     .then (function(data) {
+        
         console.log(data);
-        // console.log(
-            
-        //     "Location: " + data[0].name + "\n",
-        //     "Lat: " + data[0].lat + "\n",
-        //     "Lon: " + data[0].lon + "\n",
-        //     "State: " + data[0].state + "\n",
-            
-        //     );
 
         var loc = data[0].name;
         var lat = data[0].lat;
         var lon = data[0].lon;
             
         getWeather(loc, lat, lon);
+
     });
     
+}
+
+
+
+var buttonHandler = function(event) {
+    event.preventDefault();
+
+    selectedButton = event.target.dataset.city;
+    
+    document.getElementById("searchCity").value = selectedButton;
+    getCity(selectedButton);
+
 }
 
 
@@ -38,9 +49,18 @@ var getWeather = function(loc, lat, lon) {
 
     var searchCity = document.getElementById("searchCity").value;
     
+    saveHistory(searchCity);
+
+
     // set element variables for today's weather
     var todayEl = document.querySelector("#today");
     var todayWeatherEl = document.createElement("span");
+    var tempEl = document.querySelector("#temp")
+    var windEl = document.querySelector("#wind")
+    var humidityEl = document.querySelector("#humidity")
+    var uviEl = document.querySelector("#uvi")
+    var conditionsEl = document.querySelector("#conditions")
+
     
     // set element variables for five day forecast
     var dailyHeadingEl = document.createElement("div");
@@ -48,11 +68,6 @@ var getWeather = function(loc, lat, lon) {
 
     // set element city name 
     var cityNameEl = document.createElement("h1");
-    
-    // don't believe I need this, remove when confirmed
-    //var location = loc;
-
-    var i = 0;
 
     todayEl.textContent = "";
 
@@ -67,25 +82,51 @@ var getWeather = function(loc, lat, lon) {
 
             cityNameEl.innerHTML = loc + " (" + todayDate + ") " + "<img src='http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png' />";
             
-            todayWeatherEl.innerHTML = "Temp: " + data.current.temp + "°" + 
-            "<br />" + "Wind: " + data.current.wind_speed + "mph" + 
-            "<br />" + "Humidity: " + data.current.humidity + "%" + 
-            "<br />" + "UV Index: " + data.current.uvi + 
-            "<br />" + "Conditions: " + data.current.weather[0].description;
+            // this code works to provide the data but not the UVI color
+            //todayWeatherEl.innerHTML = "Temp: " + data.current.temp + "°" + 
+            //"<br />" + "Wind: " + data.current.wind_speed + "mph" + 
+            //"<br />" + "Humidity: " + data.current.humidity + "%" + 
+            //"<br />" + "UV Index: " + data.current.uvi + 
+            //"<br />" + "Conditions: " + data.current.weather[0].description;
+
+            tempEl.innerHTML = "Temp: " + data.current.temp + "°";
+            windEl.innerHTML = "Wind: " + data.current.wind_speed + "mph";
+            humidityEl.innerHTML = "Humidity: " + data.current.humidity + "%";
+            uviEl.innerHTML = "UV Index: " + "<span>" + data.current.uvi + "</span>";
+            uviEl.className = "uvi";
+            conditionsEl.innerHTML = data.current.weather[0].description;
+
+            if (data.current.uvi < 3) {
+                uviEl.className = "low";
+            } else if (data.current.uvi >= 3 && data.current.uvi < 6) {
+                uviEl.className = "medium";
+            } else if (data.current.uvi >= 6 && data.current.uvi < 8) {
+                uviEl.className = "high";
+            } else if (data.current.uvi >= 8 && data.current.uvi < 11) {
+                uviEl.className = "very-high";
+            } else if (data.current.uvi > 11) {
+                uviEl.className = "extreme";
+            }
+
+            
 
             //todayWeatherEl.className = "today";
             todayEl.appendChild(cityNameEl);
-            todayEl.appendChild(todayWeatherEl);
+            todayEl.appendChild(tempEl);
+            todayEl.appendChild(windEl);
+            todayEl.appendChild(humidityEl);
+            todayEl.appendChild(uviEl);
+            todayEl.appendChild(conditionsEl);
+            // todayEl.appendChild(todayWeatherEl);
             
 
             // set data for 5-Day Forecast
             //moment(todayDate, "MM/DD/YYYY").add(1, "days");
 
-            for (i=0; i < 5; i++) {
-                //alert("i: " + i);
+            for (var i=0; i < 5; i++) {
+                
                 forecastDate = moment(todayDate,"MM/DD/YYYY").add((i+1), "days");
                 forecastDate = moment(forecastDate).format("MM/DD/YYYY");
-                //alert("i: " + i + "\n" + forecastDate);
 
                 dailyHeadingEl.innerHTML = "<h4>" + forecastDate + "</h4>";
 
@@ -105,6 +146,7 @@ var getWeather = function(loc, lat, lon) {
 }
 
 
+
 var displayData = function(weatherDay, dailyHeadingEl, dailyWeatherEl) {
     
     var dayOneEl = document.querySelector("#dayOne");
@@ -113,10 +155,6 @@ var displayData = function(weatherDay, dailyHeadingEl, dailyWeatherEl) {
     var dayFourEl = document.querySelector("#dayFour");
     var dayFiveEl = document.querySelector("#dayFive");  
     
-    //alert("day: " + weatherDay);
-    //alert("heading: " + dailyHeadingEl.textContent);
-    //alert("weather: " + dailyWeatherEl.textContent);
-
     switch(weatherDay) {
 
         case 1:
@@ -139,7 +177,60 @@ var displayData = function(weatherDay, dailyHeadingEl, dailyWeatherEl) {
             dayFiveEl.innerHTML = dailyHeadingEl.innerHTML + "<br />" + dailyWeatherEl.innerHTML;
             break;
     }
+
 }
 
 
+
+var createButton = function(searchCity) {
+
+    searchHistoryButtonEl = document.createElement("button");
+    searchHistoryButtonEl.innerHTML = searchCity;
+    searchHistoryButtonEl.setAttribute("data-city",searchCity);
+    searchHistoryButtonEl.className = "btn btnSearchHistory";
+    searchHistoryEl.appendChild(searchHistoryButtonEl);
+
+}
+
+
+
+var saveHistory = function(searchCity) {
+    
+    var existingHistory = JSON.parse(localStorage.getItem("cities"));
+  
+    if (existingHistory) {
+
+        searchHistoryArr = existingHistory;
+        var isExist = searchHistoryArr.includes(searchCity);
+    } 
+
+    if (!isExist) {
+        searchHistoryArr.push(searchCity);
+        console.log("Search History Array: " + searchHistoryArr);
+        localStorage.setItem("cities", JSON.stringify(searchHistoryArr));
+        createButton(searchCity);
+    }
+    
+}
+
+
+
+var loadHistory = function() {
+
+    var existingHistory = JSON.parse(localStorage.getItem("cities"));
+
+    if (existingHistory) {
+        for (var i=0; i < existingHistory.length; i++) {
+            createButton(existingHistory[i]);
+        }
+    } else {
+        
+    }
+
+}
+
+
+
+loadHistory();
 searchCityButtonEl.addEventListener("click", getCity);
+historyButtonFormEl.addEventListener("click", buttonHandler);

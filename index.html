@@ -10,27 +10,38 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mx-auto">
         <header>
             <h1 class="text-center p-2">Weather Dashboard</h1>
         </header>
-
+        
+    
         <div class="main-content d-flex m-3">
 
-            <div class="search-history d-flex flex-column w-25">
+            <div class="col col-sm-12 col-md-8 col-lg-3 search-history d-flex flex-column">
                 <h2 class="py-3">Search for a City</h2>
                 <input id="searchCity" class="py-2" type="text" placeholder="Orlando" />
                 <button id="searchCityButton" class="btn btn-primary btnSearch my-4">Search</button>
+            
+                <form id="history-button-form">
+                    <div id="searchHistory" class="history">
+
+                    </div>
+                </form>
             </div>
 
-            <div class="weather-info w-75 m-3 p-3">
+            <div class="weather-info m-1 p-1">
 
-                <div id="today" class="today p-2 w-100">
-                    
+                <div id="today" class="today p-2">
+                    <p id="temp"></p>
+                    <p id="wind"></p>
+                    <p id="humidity"></p>
+                    <p id="uvi" class="uvi"></p>
+                    <p id="conditions"></p>
                 </div>
 
                 <h3>5-Day Forecast</h3>
-                <div class="five-day-container d-flex justify-content-between w-100">
+                <div class="five-day-container d-flex flex-wrap">
                     
                     <div id="dayOne" class="five-day m-2">
                         
@@ -57,6 +68,7 @@
             </div>
 
         </div>
+    
     </div>
     
     <script src="js/script.js"></script>
