@@ -1,13 +1,11 @@
 var searchCityButtonEl = document.querySelector("#searchCityButton");
-
-var todayDate = moment().format("MM/DD/YYYY");
+var todayDate = moment().format("MM/DD/YYYY");  
 
 
 
 var getCity = function(searchCity) {
     
     var searchCity = document.getElementById("searchCity").value;
-
     var searchCityUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335";
     
     fetch(searchCityUrl)
@@ -16,20 +14,20 @@ var getCity = function(searchCity) {
     })
     .then (function(data) {
         console.log(data);
-        console.log(
+        // console.log(
             
-            "Location: " + data[0].name + "\n",
-            "Lat: " + data[0].lat + "\n",
-            "Lon: " + data[0].lon + "\n",
-            "State: " + data[0].state + "\n",
+        //     "Location: " + data[0].name + "\n",
+        //     "Lat: " + data[0].lat + "\n",
+        //     "Lon: " + data[0].lon + "\n",
+        //     "State: " + data[0].state + "\n",
             
-            );
+        //     );
 
-            var loc = data[0].name;
-            var lat = data[0].lat;
-            var lon = data[0].lon;
+        var loc = data[0].name;
+        var lat = data[0].lat;
+        var lon = data[0].lon;
             
-    getWeather(loc, lat, lon);
+        getWeather(loc, lat, lon);
     });
     
 }
@@ -39,26 +37,26 @@ var getCity = function(searchCity) {
 var getWeather = function(loc, lat, lon) {
 
     var searchCity = document.getElementById("searchCity").value;
+    
+    // set element variables for today's weather
     var todayEl = document.querySelector("#today");
     var todayWeatherEl = document.createElement("span");
-    var dailyHeadingEl = document.createElement("span");
-    var dailyWeatherEl = document.createElement("span");
     
+    // set element variables for five day forecast
+    var dailyHeadingEl = document.createElement("div");
+    var dailyWeatherEl = document.createElement("div");  
+
+    // set element city name 
     var cityNameEl = document.createElement("h1");
     
-    var location = loc;
+    // don't believe I need this, remove when confirmed
+    //var location = loc;
 
     var i = 0;
 
     todayEl.textContent = "";
 
     var weatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely&appid=19a341d83d0899dcf97ab5d37d304335&units=imperial";
-
-    // var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335&units=imperial";
-
-    // var weatherUrl = "https://api.openweathermap.org/data/3.0/onecall?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335&units=imperial";
-
-    // var weatherUrl = "https://api.openweathermap.org/data/2.5/onecall?=" + searchCity + "&exclude=minutely&appid=19a341d83d0899dcf97ab5d37d304335&units=imperial";
 
     fetch(weatherUrl)
     .then(function (response) {
@@ -67,7 +65,7 @@ var getWeather = function(loc, lat, lon) {
     .then (function(data) {
         console.log(data);
 
-            cityNameEl.innerHTML = location + " (" + todayDate + ") " + "<img src='http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png' />";
+            cityNameEl.innerHTML = loc + " (" + todayDate + ") " + "<img src='http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png' />";
             
             todayWeatherEl.innerHTML = "Temp: " + data.current.temp + "°" + 
             "<br />" + "Wind: " + data.current.wind_speed + "mph" + 
@@ -76,12 +74,11 @@ var getWeather = function(loc, lat, lon) {
             "<br />" + "Conditions: " + data.current.weather[0].description;
 
             //todayWeatherEl.className = "today";
-            
             todayEl.appendChild(cityNameEl);
             todayEl.appendChild(todayWeatherEl);
             
 
-            // get data for 5-Day Forecast
+            // set data for 5-Day Forecast
             //moment(todayDate, "MM/DD/YYYY").add(1, "days");
 
             for (i=0; i < 5; i++) {
@@ -98,7 +95,6 @@ var getWeather = function(loc, lat, lon) {
                 "<br />" + "Humidity: " + data.daily[i].humidity + "%" + 
                 "<br />" + "UV Index: " + data.daily[i].uvi + 
                 "<br />" + "Conditions: " + data.daily[i].weather[0].description;
-                //alert("dailyWeatherEl: " + dailyWeatherEl.textContent);
 
                 var weatherDay = (i+1);
                 displayData(weatherDay,dailyHeadingEl,dailyWeatherEl);
@@ -110,11 +106,12 @@ var getWeather = function(loc, lat, lon) {
 
 
 var displayData = function(weatherDay, dailyHeadingEl, dailyWeatherEl) {
+    
     var dayOneEl = document.querySelector("#dayOne");
     var dayTwoEl = document.querySelector("#dayTwo");
     var dayThreeEl = document.querySelector("#dayThree");
     var dayFourEl = document.querySelector("#dayFour");
-    var dayFiveEl = document.querySelector("#dayFive");
+    var dayFiveEl = document.querySelector("#dayFive");  
 
     alert("day: " + weatherDay);
     alert("heading: " + dailyHeadingEl.textContent);
@@ -123,6 +120,7 @@ var displayData = function(weatherDay, dailyHeadingEl, dailyWeatherEl) {
     switch(weatherDay) {
 
         case 1:
+            console.log("case one");
             dayOneEl.appendChild(dailyHeadingEl);
             dayOneEl.appendChild(dailyWeatherEl);
             break;
