@@ -81,7 +81,7 @@ var getWeather = function(loc, lat, lon) {
     .then (function(data) {
         console.log(data);
 
-            cityNameEl.innerHTML = loc + " (" + todayDate + ") " + "<img src='http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png' />";
+            cityNameEl.innerHTML = loc + " (" + todayDate + ") " + "<img src='https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png' />";
             
             // this code works to provide the data but not the UVI color
             //todayWeatherEl.innerHTML = "Temp: " + data.current.temp + "°" + 
