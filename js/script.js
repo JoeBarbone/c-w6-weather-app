@@ -90,7 +90,8 @@ var getWeather = function(loc, lat, lon) {
                 dailyHeadingEl.innerHTML = forecastDate + "<br />";
                 //alert("dailyHeadingEl: " + dailyHeadingEl.textContent);
                 
-                dailyWeatherEl.innerHTML = "Temp: " + data.daily[i].temp.day + "°" + 
+                dailyWeatherEl.innerHTML = data.daily[i].weather[0].icon +
+                "<br />" + "Temp: " + data.daily[i].temp.day + "°" + 
                 "<br />" + "Wind: " + data.daily[i].wind_speed + "mph" + 
                 "<br />" + "Humidity: " + data.daily[i].humidity + "%" + 
                 "<br />" + "UV Index: " + data.daily[i].uvi + 
