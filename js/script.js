@@ -87,15 +87,14 @@ var getWeather = function(loc, lat, lon) {
                 forecastDate = moment(forecastDate).format("MM/DD/YYYY");
                 //alert("i: " + i + "\n" + forecastDate);
 
-                dailyHeadingEl.innerHTML = forecastDate + "<br />";
-                //alert("dailyHeadingEl: " + dailyHeadingEl.textContent);
-                
-                dailyWeatherEl.innerHTML = data.daily[i].weather[0].icon +
+                dailyHeadingEl.innerHTML = "<h4>" + forecastDate + "</h4>";
+
+                dailyWeatherEl.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png' />" + 
                 "<br />" + "Temp: " + data.daily[i].temp.day + "°" + 
                 "<br />" + "Wind: " + data.daily[i].wind_speed + "mph" + 
                 "<br />" + "Humidity: " + data.daily[i].humidity + "%" + 
                 "<br />" + "UV Index: " + data.daily[i].uvi + 
-                "<br />" + "Conditions: " + data.daily[i].weather[0].description;
+                "<br />" + data.daily[i].weather[0].description;
 
                 var weatherDay = (i+1);
                 displayData(weatherDay,dailyHeadingEl,dailyWeatherEl);
@@ -113,37 +112,31 @@ var displayData = function(weatherDay, dailyHeadingEl, dailyWeatherEl) {
     var dayThreeEl = document.querySelector("#dayThree");
     var dayFourEl = document.querySelector("#dayFour");
     var dayFiveEl = document.querySelector("#dayFive");  
-
-    alert("day: " + weatherDay);
-    alert("heading: " + dailyHeadingEl.textContent);
-    alert("weather: " + dailyWeatherEl.textContent);
+    
+    //alert("day: " + weatherDay);
+    //alert("heading: " + dailyHeadingEl.textContent);
+    //alert("weather: " + dailyWeatherEl.textContent);
 
     switch(weatherDay) {
 
         case 1:
-            console.log("case one");
-            dayOneEl.appendChild(dailyHeadingEl);
-            dayOneEl.appendChild(dailyWeatherEl);
+            dayOneEl.innerHTML = dailyHeadingEl.innerHTML + "<br />" + dailyWeatherEl.innerHTML;
             break;
         
         case 2:
-            dayTwoEl.appendChild(dailyHeadingEl);
-            dayTwoEl.appendChild(dailyWeatherEl);
+            dayTwoEl.innerHTML = dailyHeadingEl.innerHTML + "<br />" + dailyWeatherEl.innerHTML;
             break;
 
         case 3:
-            dayThreeEl.appendChild(dailyHeadingEl);
-            dayThreeEl.appendChild(dailyWeatherEl);
+            dayThreeEl.innerHTML = dailyHeadingEl.innerHTML + "<br />" + dailyWeatherEl.innerHTML;
             break;
 
         case 4:
-            dayFourEl.appendChild(dailyHeadingEl);
-            dayFourEl.appendChild(dailyWeatherEl);
+            dayFourEl.innerHTML = dailyHeadingEl.innerHTML + "<br />" + dailyWeatherEl.innerHTML;
             break;
 
         case 5:
-            dayFiveEl.appendChild(dailyHeadingEl);
-            dayFiveEl.appendChild(dailyWeatherEl);
+            dayFiveEl.innerHTML = dailyHeadingEl.innerHTML + "<br />" + dailyWeatherEl.innerHTML;
             break;
     }
 }
