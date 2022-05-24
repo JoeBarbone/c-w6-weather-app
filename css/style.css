@@ -76,7 +76,7 @@ header {
 .medium span {
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: #F25508;
+    background-color: #F5B422;
     color: white;
 }
 
@@ -138,6 +138,10 @@ header {
         border: 1px solid black;
         width: 100%;
         margin: 0 auto;
+    }
+
+    .today h1 {
+        font-size: 1.3rem;
     }
     
 }

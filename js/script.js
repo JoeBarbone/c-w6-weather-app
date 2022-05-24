@@ -12,7 +12,7 @@ var getCity = function(searchCity) {
     
     
     var searchCity = document.getElementById("searchCity").value;
-    var searchCityUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335";
+    var searchCityUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&appid=19a341d83d0899dcf97ab5d37d304335";
     
     fetch(searchCityUrl)
     .then(function (response) {
@@ -81,7 +81,7 @@ var getWeather = function(loc, lat, lon) {
     .then (function(data) {
         console.log(data);
 
-            cityNameEl.innerHTML = loc + " (" + todayDate + ") " + "<img src='http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png' />";
+            cityNameEl.innerHTML = loc + " (" + todayDate + ") " + "<img src='https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png' />";
             
             // this code works to provide the data but not the UVI color
             //todayWeatherEl.innerHTML = "Temp: " + data.current.temp + "°" + 
@@ -131,7 +131,7 @@ var getWeather = function(loc, lat, lon) {
 
                 dailyHeadingEl.innerHTML = "<h4>" + forecastDate + "</h4>";
 
-                dailyWeatherEl.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png' />" + 
+                dailyWeatherEl.innerHTML = "<img src='https://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png' />" + 
                 "<br />" + "Temp: " + data.daily[i].temp.day + "°" + 
                 "<br />" + "Wind: " + data.daily[i].wind_speed + "mph" + 
                 "<br />" + "Humidity: " + data.daily[i].humidity + "%" + 
